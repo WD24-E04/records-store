@@ -102,7 +102,6 @@ Based on the user story and the wire frame, we can conclude that we have to deal
 | POST   | `/register`   | Create a new user               | No             |
 | POST   | `/login`      | Authenticate user & return JWT  | No             |
 | GET    | `/logout`     | Log out user                    | Yes            |
-| PATCH  | `/update/:id` | Update user password            | Yes            |
 | GET    | `/me`         | Get current logged-in user data | Yes            |
 
 ### Records Routes (`/records`)
@@ -126,7 +125,7 @@ Based on the user story and the wire frame, we can conclude that we have to deal
 
 ---
 
-## 6. Frontend Structure (React)
+## 6. Thinking The Frontend Structure (React)
 
 ### Component Breakdown
 
@@ -136,7 +135,6 @@ Based on the user story and the wire frame, we can conclude that we have to deal
 | `HomePage.jsx`     | Landing page                            |
 | `RecordsList.jsx`  | Lists all records                       |
 | `RecordCard.jsx`   | Displays individual record details      |
-| `SearchRecord.jsx` | Search/filter records by title/genre    |
 | `CartSidebar.jsx`  | Displays the shopping cart              |
 | `CartItemList.jsx` | Lists cart items                        |
 | `CartItem.jsx`     | Displays an individual cart item        |
@@ -145,7 +143,7 @@ Based on the user story and the wire frame, we can conclude that we have to deal
 
 ### State Management [(Context API + Reducers)](https://react.dev/learn/scaling-up-with-reducer-and-context)
 
-State structure is always matching the collections in out database
+State structure is always matching the collections in our database
 
 - **Users** (`usersReducer.js`)
 - **Records** (`recordsReducer.js`)
@@ -179,11 +177,14 @@ State structure is always matching the collections in out database
   - `getCartData()`, `addToCart()`, `updateCartItem()`, `removeFromCart()`
   - `fetchRecords()`, `fetchRecordById()`
 - **Test API calls using buttons (Temporary UI).**
+
   - Example: Create simple buttons like:
+
     ```jsx
     <button onClick={() => getMyData(usersDispatch)}>Test Login</button>
     <button onClick={() => fetchRecords(recordsDispatch)}>Fetch Records</button>
     ```
+
   - If you are working:
     - alone: ensure API calls **return data properly** before moving to UI.
     - in a group: some team members can focus on implementing API calls, while others build component files based on the wireframe.

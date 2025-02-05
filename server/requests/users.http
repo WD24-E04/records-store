@@ -1,0 +1,32 @@
+### Signup
+POST http://localhost:8000/users/register
+Content-Type: application/json
+
+{
+  "username": "YOUR_USERNAME",
+  "email": "YOUR_EMAIL",
+  "password": "YOUR_PASSWORD"
+}
+
+###
+
+### Login
+POST http://localhost:8000/users/login
+Content-Type: application/json
+
+{
+  "email": "YOUR_EMAIL",
+  "password": "YOUR_PASSWORD"
+}
+
+###
+
+### Logout
+GET http://localhost:8000/users/logout
+Content-Type: application/json
+
+###
+
+### Get My Data
+GET http://localhost:8000/users/me
+Content-Type: application/json
