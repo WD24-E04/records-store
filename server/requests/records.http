@@ -1,0 +1,4 @@
+### Get Records
+
+GET http://localhost:8000/records
+Content-Type: application/json

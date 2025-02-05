@@ -1,0 +1,21 @@
+### Get Cart
+GET http://localhost:8000/carts/67a37cdd3f548f398c86fa91
+Content-Type: application/json
+
+
+### Add Item to Cart
+POST http://localhost:8000/carts/67a37cdd3f548f398c86fa91/add
+Content-Type: application/json
+
+{
+  "record": "67a370686a96ffec6fcae5df",
+  "quantity": 1
+}
+
+### Delete Cart Item
+DELETE http://localhost:8000/carts/67a37cdd3f548f398c86fa91/delete
+Content-Type: application/json
+
+{
+  "record": "67a370686a96ffec6fcae5df"
+}

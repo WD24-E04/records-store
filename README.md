@@ -109,7 +109,6 @@ Based on the user story and the wire frame, we can conclude that we have to deal
 | Method | Endpoint | Description               | Auth Required? |
 | ------ | -------- | ------------------------- | -------------- |
 | GET    | `/`      | Get all records           | No             |
-| GET    | `/:id`   | Get single record details | No             |
 | POST   | `/`      | Add a new record          | (Admin)        |
 | PATCH  | `/:id`   | Update a record           | (Admin)        |
 | DELETE | `/:id`   | Delete a record           | (Admin)        |

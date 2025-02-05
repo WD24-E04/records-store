@@ -3,9 +3,10 @@ POST http://localhost:8000/users/register
 Content-Type: application/json
 
 {
-  "username": "YOUR_USERNAME",
-  "email": "YOUR_EMAIL",
-  "password": "YOUR_PASSWORD"
+  "firstName": "zakaria",
+  "lastName": "hamdan",
+  "email": "zak@test.com",
+  "password": "1234"
 }
 
 ###
@@ -15,8 +16,8 @@ POST http://localhost:8000/users/login
 Content-Type: application/json
 
 {
-  "email": "YOUR_EMAIL",
-  "password": "YOUR_PASSWORD"
+  "email": "zak@test.com",
+  "password": "1234"
 }
 
 ###
