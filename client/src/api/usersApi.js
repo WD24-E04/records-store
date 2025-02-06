@@ -1,10 +1,8 @@
 import axios from "axios";
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = "http://localhost:8000/users";
 
 export const register = async (usersDispatch, formData) => {
   try {
-    const response = await axios.post("/register", formData);
+    const response = await axios.post("/users/register", formData);
     usersDispatch({ type: "LOGIN_SUCCESS", payload: response.data.data });
   } catch (error) {
     console.log(error);
@@ -13,7 +11,7 @@ export const register = async (usersDispatch, formData) => {
 
 export const login = async (usersDispatch, formData) => {
   try {
-    const response = await axios.post("/login", formData);
+    const response = await axios.post("/users/login", formData);
     usersDispatch({ type: "LOGIN_SUCCESS", payload: response.data.data });
   } catch (error) {
     console.log(error);
@@ -22,7 +20,7 @@ export const login = async (usersDispatch, formData) => {
 
 export const logout = async (usersDispatch) => {
   try {
-    await axios.get("/logout");
+    await axios.get("/users/logout");
     usersDispatch({ type: "LOGOUT" });
   } catch (error) {
     console.log(error);
@@ -31,7 +29,7 @@ export const logout = async (usersDispatch) => {
 
 export const getMyData = async (usersDispatch) => {
   try {
-    const response = await axios.get("/me");
+    const response = await axios.get("/users/me");
 
     if (response.data && response.data.isAuthenticated) {
       usersDispatch({ type: "LOGIN_SUCCESS", payload: response.data.data });
