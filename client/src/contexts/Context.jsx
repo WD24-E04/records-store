@@ -9,6 +9,8 @@ export const DataProvider = ({ children }) => {
     usersInitialState
   );
 
+  console.log("users State: ", usersState);
+
   return (
     <DataContext.Provider value={{ usersState, usersDispatch }}>
       {children}

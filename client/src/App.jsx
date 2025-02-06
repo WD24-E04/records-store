@@ -1,15 +1,20 @@
 import React, { useContext } from "react";
 import { DataContext } from "./contexts/Context";
+import { login, logout } from "./api/usersApi";
 
 const App = () => {
-  const { usersState, usersDispatch } = useContext(DataContext);
+  const { usersDispatch } = useContext(DataContext);
+  const formData = {
+    email: "test3@test.com",
+    password: "1234",
+  };
 
-  usersDispatch({
-    type: "LOGIN_SUCCESS",
-    payload: { email: "", password: "" },
-  });
-
-  return <div></div>;
+  return (
+    <div>
+      <button onClick={() => login(usersDispatch, formData)}>Login</button>
+      <button onClick={() => logout(usersDispatch)}>Logout</button>
+    </div>
+  );
 };
 
 export default App;
