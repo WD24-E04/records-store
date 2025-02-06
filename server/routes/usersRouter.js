@@ -15,5 +15,6 @@ router
   .post("/login", login)
   .get("/logout", checkToken, logout)
   .get("/me", checkToken, getMe);
+  
 
 export default router;

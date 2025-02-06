@@ -28,3 +28,15 @@ export const logout = async (usersDispatch) => {
     console.log(error);
   }
 };
+
+export const getMyData = async (usersDispatch) => {
+  try {
+    const response = await axios.get("/me");
+
+    if (response.data && response.data.isAuthenticated) {
+      usersDispatch({ type: "LOGIN_SUCCESS", payload: response.data.data });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};

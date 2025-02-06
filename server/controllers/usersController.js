@@ -81,6 +81,13 @@ export const logout = async (req, res, next) => {
 
 export const getMe = async (req, res, next) => {
   try {
+    const { data, isAuthenticated } = req;
+
+    res.status(200).json({
+      success: true,
+      data,
+      isAuthenticated,
+    });
   } catch (error) {
     next(error);
   }

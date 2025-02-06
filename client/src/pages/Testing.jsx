@@ -8,12 +8,12 @@ export const Testing = () => {
   const registerFormData = {
     firstName: "test",
     lastName: "test",
-    email: "test3@test.com",
+    email: "test11@test.com",
     password: "1234",
   };
 
   const loginFormData = {
-    email: "test3@test.com",
+    email: "test11@test.com",
     password: "1234",
   };
   return (

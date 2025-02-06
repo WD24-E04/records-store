@@ -14,7 +14,8 @@ const checkToken = async (req, res, next) => {
 
     if (!user) throw createError(401, "User is no longer exist");
 
-    req.user = user; // To be explain in depth when implementing keeping user logged in after regreshing the page
+    req.data = user;
+    req.isAuthenticated = true;
 
     next();
   } catch (error) {

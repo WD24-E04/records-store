@@ -1,5 +1,6 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import { usersInitialState, usersReducer } from "../reducers/usersReducer";
+import { getMyData } from "../api/usersApi";
 
 export const DataContext = createContext();
 
@@ -9,6 +10,9 @@ export const DataProvider = ({ children }) => {
     usersInitialState
   );
 
+  useEffect(() => {
+    getMyData(usersDispatch);
+  }, []);
   console.log("users State: ", usersState);
 
   return (
