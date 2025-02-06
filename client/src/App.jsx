@@ -4,14 +4,25 @@ import { login, logout } from "./api/usersApi";
 
 const App = () => {
   const { usersDispatch } = useContext(DataContext);
-  const formData = {
+
+  const registerFormData = {
+    firstName: "test",
+    lastName: "test",
+    email: "test3@test.com",
+    password: "1234",
+  };
+
+  const loginFormData = {
     email: "test3@test.com",
     password: "1234",
   };
 
   return (
     <div>
-      <button onClick={() => login(usersDispatch, formData)}>Login</button>
+      <button onClick={() => register(usersDispatch, registerFormData)}>
+        Login
+      </button>
+      <button onClick={() => login(usersDispatch, loginFormData)}>Login</button>
       <button onClick={() => logout(usersDispatch)}>Logout</button>
     </div>
   );
