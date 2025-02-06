@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
+import bcrypt from "bcrypt";
 
-const UserSchema = new Schema({
+const userSchema = new Schema({
   firstName: {
     type: String,
     required: true,
@@ -28,11 +29,25 @@ const UserSchema = new Schema({
   },
 });
 
-UserSchema.methods.toJSON = function () {
-  const obj = this.toObject();
-  delete obj.password;
-  delete obj.__v;
-  return obj;
+userSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 12);
+  }
+  next();
+});
+
+userSchema.pre("findOneAndUpdate", async function (next) {
+  if (this._update && this._update.password) {
+    this._update.password = await bcrypt.hash(this._update.password, 12);
+  }
+  next();
+});
+
+userSchema.methods.isPasswordCorrect = async function (
+  inputPassword,
+  sotredPassword
+) {
+  return await bcrypt.compare(inputPassword, sotredPassword);
 };
 
-export default model("User", UserSchema);
+export default model("User", userSchema);

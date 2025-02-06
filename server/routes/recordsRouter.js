@@ -3,6 +3,6 @@ import { getAllRecords } from "../controllers/recordsController.js";
 
 const router = express.Router();
 
-router.get("/", getAllRecords);
+router.route("/").get(getAllRecords);
 
 export default router;

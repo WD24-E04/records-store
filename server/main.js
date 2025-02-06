@@ -1,13 +1,12 @@
-import express from "express";
 import cookieParser from "cookie-parser";
+import express from "express";
 import cors from "cors";
 import "dotenv/config";
 
 import connectDB from "./utils/database.js";
+import recordsRouter from "./routes/recordsRouter.js";
 import usersRouter from "./routes/usersRouter.js";
 import cartsRouter from "./routes/cartsRouter.js";
-import recordsRouter from "./routes/recordsRouter.js";
-
 import {
   globalErrorHandler,
   routeNotFound,

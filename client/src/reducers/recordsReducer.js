@@ -1,12 +1,12 @@
 export const recordsInitialState = {
-  records: [],
+  data: [],
 };
 
 export const recordsReducer = (state, action) => {
   switch (action.type) {
     case "FETCH_RECORDS_SUCCESS":
       return {
-        records: action.payload,
+        data: action.payload,
       };
 
     default:

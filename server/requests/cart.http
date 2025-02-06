@@ -1,0 +1,35 @@
+### Get Cart
+GET http://localhost:8000/carts/ID_OF_AN_EXISTING_CART_IN_THE_DATABASE
+Content-Type: application/json
+
+###
+
+### Add Item to Cart
+POST http://localhost:8000/carts/ID_OF_AN_EXISTING_CART_IN_THE_DATABASE
+Content-Type: application/json
+
+{
+  "record": ID_OF_AN_EXISTING_RECORD_IN_THE_DATABASE,
+  "quantity": 1
+}
+
+###
+
+### Delete Item from Cart
+PUT http://localhost:8000/carts/ID_OF_AN_EXISTING_CART_IN_THE_DATABASE
+Content-Type: application/json
+
+{
+  "record": ID_OF_AN_EXISTING_RECORD_IN_THE_CART
+}
+
+###
+
+### Update Item Quantity in Cart
+PATCH http://localhost:8000/carts/ID_OF_AN_EXISTING_CART_IN_THE_DATABASE
+Content-Type: application/json
+
+{
+  "record": "ID_OF_AN_EXISTING_RECORD_IN_THE_CART",
+  "quantity": NEW_QUANTITY_AS_NUMBER
+}

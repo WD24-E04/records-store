@@ -1,41 +1,20 @@
 import createError from "http-errors";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
 
+import { createSendToken } from "../utils/jwt.js";
 import User from "../models/User.js";
 import Cart from "../models/Cart.js";
 
-const tokenizeCookie = async (user, res) => {
-  const { JWT_SECRET, JWT_EXP } = process.env;
-  const token = jwt.sign({ id: user._id }, JWT_SECRET, {
-    expiresIn: JWT_EXP,
-  });
-  res.cookie("jwtToken", token, { maxAge: 10 * 60 * 1000, httpOnly: true }); // to be modified when depolyment
+const createCart = async (user) => {
+  const newCart = await Cart.create({});
+  user.cartId = newCart._id;
+  await user.save();
 };
 
 export const register = async (req, res, next) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
-
-    const hashedPassword = await bcrypt.hash(password, 12);
-
-    const cart = await Cart.create({});
-
-    const user = await User.create({
-      firstName,
-      lastName,
-      email,
-      password: hashedPassword,
-      cartId: cart._id,
-    });
-
-    await tokenizeCookie(user, res);
-
-    res.status(201).json({
-      success: true,
-      message: "User created successfully",
-      data: user,
-    });
+    const user = await User.create(req.body);
+    await createCart(user);
+    createSendToken(res, 201, user);
   } catch (error) {
     next(error);
   }
@@ -51,17 +30,11 @@ export const login = async (req, res, next) => {
 
     const user = await User.findOne({ email });
 
-    if (!user || !(await bcrypt.compare(password, user.password))) {
-      throw createError(401, "Incorrect email or passsword");
+    if (!user || !(await user.isPasswordCorrect(password, user.password))) {
+      throw createError(401, "Incorrect email or password");
     }
 
-    await tokenizeCookie(user, res);
-
-    res.status(201).json({
-      success: true,
-      message: "User logged successfully",
-      data: user,
-    });
+    createSendToken(res, 200, user);
   } catch (error) {
     next(error);
   }
@@ -69,10 +42,12 @@ export const login = async (req, res, next) => {
 
 export const logout = async (req, res, next) => {
   try {
-    res.clearCookie("jwtToken", { httpOnly: true }); // to be modified when depolyment
+    res.clearCookie("jwtToken", { httpOnly: true });
+
     res.status(200).json({
       success: true,
-      message: "User was successfully logged out",
+      status: 200,
+      data: "User was successfully logged out",
     });
   } catch (error) {
     next(error);
@@ -88,6 +63,18 @@ export const getMe = async (req, res, next) => {
       data,
       isAuthenticated,
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const updateUser = async (req, res, next) => {
+  try {
+    const { password } = req.body;
+    const { id } = req.params;
+
+    const user = await User.findByIdAndUpdate(id, { password }, { new: true });
+    res.status(200).json({ message: "Update success", data: user });
   } catch (error) {
     next(error);
   }

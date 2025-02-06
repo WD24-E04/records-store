@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const RecordSchema = new Schema({
+const recordSchema = new Schema({
   title: String,
   year: Number,
   artist: String,
@@ -9,4 +9,8 @@ const RecordSchema = new Schema({
   genre: String,
 });
 
-export default model("Record", RecordSchema);
+const Record = model("Record", recordSchema);
+export default Record;
+
+//! OR:
+// export default model("Record", recordSchema);

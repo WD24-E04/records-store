@@ -1,9 +1,9 @@
-export const cartsInitialState = {
+export const cartInitialState = {
   items: [],
   isOpen: false,
 };
 
-export const cartsReducer = (state, action) => {
+export const cartReducer = (state, action) => {
   switch (action.type) {
     case "GET_CART_DATA":
       return {
@@ -11,17 +11,32 @@ export const cartsReducer = (state, action) => {
         items: action.payload.items,
       };
 
-    case "ADD_CART_ITEM":
+    case "ADD_CART_ITEM": {
       return {
         ...state,
         items: [...state.items, action.payload],
       };
+    }
 
-    case "DELETE_CART_ITEM":
-      return {};
+    case "UPDATE_CART_ITEM": {
+      return {
+        ...state,
+        items: state.items.map((item) =>
+          item._id === action.payload._id ? action.payload : item
+        ),
+      };
+    }
 
-    case "TOGGLE_CART":
-      return {};
+    case "DELETE_CART_ITEM": {
+      return {
+        ...state,
+        items: state.items.filter((item) => item._id !== action.payload),
+      };
+    }
+
+    case "TOGGLE_CART": {
+      return { ...state, isOpen: !state.isOpen };
+    }
 
     default:
       return state;
